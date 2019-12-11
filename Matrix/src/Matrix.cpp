@@ -16,7 +16,7 @@ Matrix::~Matrix()
     c = -1;
 }
 
-Matrix::Matrix(int row, int col): r(row),  c(col)
+Matrix::Matrix(int row, int col) : r(row), c(col)
 {
     _Matrix = new double* [row];
     for(int i = 0; i < r; i++)
@@ -25,7 +25,7 @@ Matrix::Matrix(int row, int col): r(row),  c(col)
     }
 }
 
-Matrix::Matrix(int row, int col, double init): r(row),  c(col)
+Matrix::Matrix(int row, int col, double init) : r(row), c(col)
 {
     _Matrix = new double* [r];
     for(int i = 0; i < r; i++)
@@ -38,7 +38,7 @@ Matrix::Matrix(int row, int col, double init): r(row),  c(col)
     }
 }
 
-Matrix::Matrix(int n): r(n),  c(n)
+Matrix::Matrix(int n) : r(n), c(n)
 {
     _Matrix = new double* [r];
     for(int i = 0; i < n; i++)
@@ -47,7 +47,7 @@ Matrix::Matrix(int n): r(n),  c(n)
     }
 }
 
-Matrix::Matrix(int n, double init): r(n),  c(n)
+Matrix::Matrix(int n, double init) : r(n), c(n)
 {
     _Matrix = new double* [r];
     for(int i = 0; i < r; i++)
@@ -60,17 +60,9 @@ Matrix::Matrix(int n, double init): r(n),  c(n)
     }
 }
 
-Matrix Matrix::copy() const
+bool Matrix::isNull() const
 {
-    Matrix m(r, c);
-    for(int i = 0; i < r; ++i)
-    {
-        for(int j = 0; j < c; ++j)
-        {
-            m._Matrix[i][j] = _Matrix[i][j];
-        }
-    }
-    return m;
+    return r == 0 || c == 0;
 }
 
 
@@ -166,7 +158,7 @@ class Matrix Matrix::getMatrixByArray(int n, const double* array)
 }
 
 
-class Matrix Matrix::getReshapeByRow(int row, int col)
+Matrix Matrix::getReshapeByRow(int row, int col)
 {
     Matrix reshape(row, col);
     int num;
@@ -181,7 +173,7 @@ class Matrix Matrix::getReshapeByRow(int row, int col)
     return reshape;
 }
 
-class Matrix Matrix::getReshapeByCol(int row, int col)
+Matrix Matrix::getReshapeByCol(int row, int col)
 {
     Matrix reshape(row, col);
     int num;
@@ -197,7 +189,7 @@ class Matrix Matrix::getReshapeByCol(int row, int col)
 }
 
 /// set
-void Matrix::setRowVector(int row, Vector rowVector)
+void Matrix::setRowVector(int row, const Vector& rowVector)
 {
     for(int i = 0; i < c; ++i)
     {
@@ -205,11 +197,24 @@ void Matrix::setRowVector(int row, Vector rowVector)
     }
 }
 
-void Matrix::setColVector(int col, Vector colVector)
+void Matrix::setColVector(int col, const Vector& colVector)
 {
     for(int i = 0; i < r; ++i)
     {
         _Matrix[i][col] = colVector[i];
     }
+}
+
+Matrix Matrix::Copy() const
+{
+    Matrix copy(r, c);
+    for(int i = 0; i < r; ++i)
+    {
+        for(int j = 0; j < c; ++j)
+        {
+            copy._Matrix[i][j] = _Matrix[i][j];
+        }
+    }
+    return copy;
 }
 

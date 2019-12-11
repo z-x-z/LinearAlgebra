@@ -36,6 +36,7 @@ private:
             delete _Matrix[i];
         }
         delete _Matrix;
+        r = c = 0;
     }
 
     void newMatrix(int row, int col)
@@ -59,12 +60,13 @@ public:
 
     Matrix(int n, Matrix_T init);
 
-    explicit Matrix(int n);
+    explicit Matrix(int n = 0);
 
     ~Matrix();
 
+    bool isNull() const;
+
     /// Property
-    Matrix copy() const;
 
     int getRow();
 
@@ -88,10 +90,11 @@ public:
 
     Matrix getReshapeByCol(int row, int col);
 
+    void setRowVector(int row, const Vector& rowVector);
 
-    void setRowVector(int row, Vector rowVector);
+    void setColVector(int col, const Vector& colVector);
 
-    void setColVector(int col, Vector colVector);
+    Matrix Copy() const;
 
     /// IO
     void printFormatRow(int row, const string& format) const;
@@ -120,6 +123,7 @@ public:
 
     Matrix_T* operator[](int row) const;
 
+    //  返回的是引用类型，慎用！
     Matrix& operator=(const Matrix& m);
 
     Matrix operator+(const Matrix& m) const;
@@ -133,7 +137,7 @@ public:
     Matrix operator^(int n) const;
 
 
-    /// Scale,  Vector Operations
+    /// Scalar,  Vector Operations
     void add(Matrix_T d);
 
     void rowAdd(int row, Matrix_T d);
@@ -166,7 +170,7 @@ public:
     static Matrix transpose(const Matrix& m);
 
     Matrix matAdd(const Matrix& m2) const;  // 由于静态函数中调用的参数m1为const型，故在
-    /// 该函数中要将该函数标为const
+    // 该函数中要将该函数标为const
     Matrix matSub(const Matrix& m2) const;
 
     Matrix matMul(const Matrix& m2) const;
@@ -185,26 +189,10 @@ public:
 
     Matrix_T determinant() const;
 
-    static Vector solveLinearEquation(Matrix& A, Vector b);
-
-    Vector solveLinearEquation(Vector b) const ;
 
     /// Some Matrix
     static Matrix identity(int n);
 
-    //(0, 1]
-    static Matrix random(int n);
-
-    static Matrix random(int r, int c);
-
-    static Matrix randMatrix_T(int n, Matrix_T begin, Matrix_T end);
-
-    static Matrix randMatrix_T(int r, int c, Matrix_T begin, Matrix_T end);
-
-    // [begin, end]
-    static Matrix randInt(int n, int begin, int end);
-
-    static Matrix randInt(int r, int c, int begin, int end);
 };
 
 

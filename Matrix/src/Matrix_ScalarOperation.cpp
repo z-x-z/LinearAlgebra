@@ -41,7 +41,7 @@ void Matrix::mul(double d)
 void Matrix::div(double d)
 {
 
-    mul(1/d);
+    mul(1 / d);
 }
 
 void Matrix::rowAdd(int row, Matrix_T d)
@@ -71,7 +71,7 @@ void Matrix::rowMul(int row, Matrix_T d)
 
 void Matrix::rowDiv(int row, Matrix_T d)
 {
-    rowMul(row, 1/d);
+    rowMul(row, 1 / d);
 }
 
 void Matrix::rowExchange(int i, int j)

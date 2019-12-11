@@ -4,20 +4,20 @@
 
 #include "Vector.h"
 
-Vector& Vector::operator=(const class Vector& v)
+Vector& Vector::operator=(const Vector& v)
 {
-    if(this!=&v)
+    if(this != &v)
     {
         newVector(v.length);
         for(int i = 0; i < length; ++i)
         {
-            _Vector[i] =  v._Vector[i];
+            _Vector[i] = v._Vector[i];
         }
     }
     return *this;
 }
 
-Vector_T & Vector::operator[](int i) const
+Vector_T& Vector::operator[](int i) const
 {
     return _Vector[i];
 }

@@ -8,10 +8,10 @@ double* Matrix::operator[](int row) const
     return _Matrix[row];
 }
 
-Matrix & Matrix::operator=(const class Matrix & m)
+Matrix& Matrix::operator=(const class Matrix& m)
 {
     // 先检查自我赋值
-    if(this!=&m)
+    if(this != &m)
     {
         this->newMatrix(m.r, m.c);
         for(int i = 0; i < r; ++i)
@@ -25,28 +25,32 @@ Matrix & Matrix::operator=(const class Matrix & m)
     return *this;
 }
 
-Matrix Matrix::operator+(const class Matrix & m) const
+Matrix Matrix::operator+(const class Matrix& m) const
 {
     return this->matAdd(m);
 }
-Matrix Matrix::operator-(const class Matrix & m) const
+
+Matrix Matrix::operator-(const class Matrix& m) const
 {
-    return  this->matSub(m);
+    return this->matSub(m);
 }
-Matrix Matrix::operator*(const class Matrix & m) const
+
+Matrix Matrix::operator*(const class Matrix& m) const
 {
     return this->matMul(m);
 }
-Matrix Matrix::operator/(const class Matrix & m) const
+
+Matrix Matrix::operator/(const class Matrix& m) const
 {
-    return  this->matDiv(m);
+    return this->matDiv(m);
 }
+
 Matrix Matrix::operator^(int n) const
 {
     Matrix m = *this;
-    for(int i = 0; i < n-1; ++i)
+    for(int i = 0; i < n - 1; ++i)
     {
-        m = m*(*this);
+        m = m * (*this);
     }
     return m;
 }

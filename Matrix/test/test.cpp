@@ -3,6 +3,7 @@
 //
 #include <random>
 #include "test.h"
+#include "../../LinearRandom/src/LRandom.h"
 
 void test_IO()
 {
@@ -12,17 +13,16 @@ void test_IO()
     string file_path_out = "../rsc/text/Matrix_dataout";
     file_in.open(file_path);
     file_out.open(file_path_out);
-    if(file_in.is_open()&&file_out.is_open())
+    if(file_in.is_open() && file_out.is_open())
     {
-        cout<<"Reading from file"<<endl;
-        Matrix m= Matrix::matrixFromFile(file_in);
+        cout << "Reading from file" << endl;
+        Matrix m = Matrix::matrixFromFile(file_in);
         m.print();
-        cout<<"\nWriting to file"<<endl;
+        cout << "\nWriting to file" << endl;
         m.writeIntoFile(file_out);
     }
     file_in.close();
     file_out.close();
-    int r, c;
 
 }
 
@@ -34,12 +34,12 @@ void test_MatrixOperation()
     Vector array3 = m1.getArrayByRowOrder();
     for(int i = 0; i < 6; ++i)
     {
-        cout<<array2[i]<<" ";
+        cout << array2[i] << " ";
     }
-    cout<<endl;
+    cout << endl;
     for(int i = 0; i < 6; ++i)
     {
-        cout<<array3[i]<<" ";
+        cout << array3[i] << " ";
     }
 }
 
@@ -77,7 +77,7 @@ void test_Operator()
 {
     double array1[] = {1, 2, 3, 4, 5, 6, 7, 8, 10};
     Matrix m = Matrix::getMatrixByArray(3, 3, array1);
-    Matrix m1 = Matrix(2,2,0);
+    Matrix m1 = Matrix(2, 2, 0);
     m1.print();
     printf("\n");
     m1 = m;
@@ -93,24 +93,26 @@ void test_det()
 
 void test_random()
 {
-    auto rand1=  Matrix::random(5);
+    LRandom rand(time(nullptr));
+    auto rand1 = rand.randMatrix(5);
     printf("\nMatrix::random(5):\n");
     rand1.printFormat("%5.3f");
-    auto rand2=  Matrix::randInt(5, 0, 10);
+    auto rand2 = rand.randIntMatrix(5, 0, 10);
     printf("\nMatrix::randInt(5, 0, 10):\n");
     rand2.printInt();
-    auto rand3=  Matrix::randMatrix_T(5, 0.0, 10.0);
+    auto rand3 = rand.randIntMatrix(5, 0.0, 10.0);
     printf("\nrandMatrix_T(5, 0.0, 10.0):\n");
     rand3.print();
 }
 
 void test_algorithm()
 {
-    auto rand1 = Matrix::randMatrix_T(15, 0, 10);
+    auto rand = LRandom(time(nullptr));
+    auto rand1 = rand.randMatrix(10, 0.0, 10);
     printf("\n---Original---\n");
     rand1.print();
     printf("\n---det---\n");
-    cout<<rand1.determinant();
+    cout << rand1.determinant();
     auto inverse = rand1.inverse();
     printf("\n---inverse---\n");
     inverse.print();

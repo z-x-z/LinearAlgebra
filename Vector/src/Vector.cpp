@@ -4,12 +4,12 @@
 
 #include "Vector.h"
 
-Vector::Vector(int _length): length(_length)
+Vector::Vector(int _length) : length(_length)
 {
     _Vector = new Vector_T[length];
 }
 
-Vector::Vector(int _length, int init): length(_length)
+Vector::Vector(int _length, int init) : length(_length)
 {
     _Vector = new Vector_T[length];
     for(int i = 0; i < length; ++i)
@@ -18,7 +18,7 @@ Vector::Vector(int _length, int init): length(_length)
     }
 }
 
-Vector::Vector(int _length, Vector_T* vec): length(_length)
+Vector::Vector(int _length, const Vector_T* vec) : length(_length)
 {
     _Vector = new Vector_T[length];
     for(int i = 0; i < length; ++i)
@@ -41,4 +41,19 @@ int Vector::getLength() const
 Vector_T* Vector::getVector() const
 {
     return _Vector;
+}
+
+Vector Vector::Copy() const
+{
+    Vector copy(length);
+    for(int i = 0; i < length; ++i)
+    {
+        copy._Vector[i] = _Vector[i];
+    }
+    return copy;
+}
+
+bool Vector::isNull() const
+{
+    return length == 0;
 }

@@ -26,7 +26,7 @@ Matrix Matrix::matDiv(const class Matrix& m1, const class Matrix& m2)
 }
 
 
-Matrix Matrix::transpose(const class Matrix & m)
+Matrix Matrix::transpose(const class Matrix& m)
 {
     return m.transpose();
 }

@@ -52,7 +52,7 @@ Matrix Matrix::inverse(const class Matrix& m)
 Matrix Matrix::inverse() const
 {
     assert(r != 0 && r == c);
-    Matrix m = copy();
+    Matrix m = Copy();
     Matrix I = Matrix::identity(r);
     int rowIndex[r];
     // 行变换数组
@@ -66,7 +66,7 @@ Matrix Matrix::inverse() const
         // 寻找部分主元(rowIndex[j], i)
         Matrix_T row_maxValue = 0.0;
         int cur_row;
-        int maxj;
+        int maxj = i;
         for(int j = i; j < r; ++j)
         {
             cur_row = rowIndex[j];
@@ -120,14 +120,14 @@ Matrix Matrix::inverse() const
 }
 
 
-Matrix_T Matrix::determinant(const class Matrix & m)
+Matrix_T Matrix::determinant(const class Matrix& m)
 {
     return m.determinant();
 }
 
 double Matrix::determinant() const
 {
-    Matrix m = copy();
+    Matrix m = Copy();
     Matrix_T det = 1;
     for(int i = 0; i < c; ++i)
     {
@@ -143,12 +143,3 @@ double Matrix::determinant() const
     return det;
 }
 
-Vector Matrix::solveLinearEquation(class Matrix & A,Vector b)
-{
-    return A.solveLinearEquation(b);
-}
-
-Vector Matrix::solveLinearEquation(Vector b) const
-{
-    return NULL;
-}
